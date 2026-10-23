@@ -7,7 +7,6 @@ from nltk.tag import RegexpTagger
 nltk.download('punkt')
 nltk.download('punkt_tab')
 
-# Hand-written rules
 patterns = [
     (r'.*ing$', 'VBG'),
     (r'.*ed$', 'VBD'),

@@ -6,10 +6,6 @@ nltk.download('brown')
 nltk.download('punkt')
 nltk.download('punkt_tab')
 
-# --------------------------------------------------
-# PART A: Issues in PoS Tagging
-# --------------------------------------------------
-
 tagged_sentences = brown.tagged_sents(categories='news')
 
 size = int(len(tagged_sentences) * 0.9)
@@ -21,7 +17,6 @@ bigram_tagger = BigramTagger(
     backoff=unigram_tagger
 )
 
-# 1. Ambiguity
 sentence1 = (
     "I saw her duck under the table and duck the flying ball."
 )
@@ -30,14 +25,12 @@ print("\n1. AMBIGUITY")
 print("Sentence:", sentence1)
 print(bigram_tagger.tag(nltk.word_tokenize(sentence1)))
 
-# 2. Unknown word
 sentence2 = "Zorblax quickly entered the garden."
 
 print("\n2. UNKNOWN WORD")
 print("Sentence:", sentence2)
 print(bigram_tagger.tag(nltk.word_tokenize(sentence2)))
 
-# 3. Domain dependence
 sentence3 = "OMG, this movie is soooo cool!"
 sentence4 = "The moonlight dances softly on the sea."
 
@@ -48,11 +41,6 @@ print(bigram_tagger.tag(nltk.word_tokenize(sentence3)))
 
 print("\nPoem-like sentence:")
 print(bigram_tagger.tag(nltk.word_tokenize(sentence4)))
-
-
-# --------------------------------------------------
-# PART B: HMM and Viterbi Algorithm
-# --------------------------------------------------
 
 states = ['DT', 'NN', 'VB']
 
@@ -68,7 +56,6 @@ trans_p = {
     'VB': {'DT': 0.40, 'NN': 0.50, 'VB': 0.10}
 }
 
-# Probabilities from the activity sheet
 emit_p = {
     'DT': {'a': 0.5, 'the': 0.5},
     'NN': {'cat': 0.4, 'dog': 0.4, 'runs': 0.2},
@@ -83,7 +70,7 @@ def viterbi(obs, states, start_p, trans_p, emit_p):
     V = [{}]
     path = {}
 
-    # Initialization
+  
     for state in states:
         emission = emit_p[state].get(obs[0], 1e-6)
         V[0][state] = start_p[state] * emission
@@ -93,7 +80,7 @@ def viterbi(obs, states, start_p, trans_p, emit_p):
     for state in states:
         print(f"V[0][{state}] = {V[0][state]:.8f}")
 
-    # Recursion
+
     for t in range(1, len(obs)):
         V.append({})
         new_path = {}
@@ -120,7 +107,7 @@ def viterbi(obs, states, start_p, trans_p, emit_p):
         for state in states:
             print(f"V[{t}][{state}] = {V[t][state]:.8f}")
 
-    # Termination
+
     last_index = len(obs) - 1
 
     best_probability, best_state = max(
@@ -131,7 +118,6 @@ def viterbi(obs, states, start_p, trans_p, emit_p):
     return best_probability, path[best_state]
 
 
-# Run Viterbi on the worksheet sentence
 sentence = ['a', 'cat', 'runs']
 
 probability, best_sequence = viterbi(

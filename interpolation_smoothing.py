@@ -1,6 +1,4 @@
 
-# Experiment 3: Linear Interpolation Smoothing
-
 import nltk
 nltk.download('punkt')
 nltk.download('punkt_tab')
@@ -20,22 +18,19 @@ trigram_freq = FreqDist(trigrams(tokens))
 
 N = len(tokens)
 
-# Weights must sum to 1
 lambda1 = 0.1
 lambda2 = 0.3
 lambda3 = 0.6
 
 def interpolated_prob(w1, w2, w3):
-    # Unigram probability
+  
     p_uni = unigram_freq[w3] / N
 
-    # Bigram probability
     if unigram_freq[w2] > 0:
         p_bi = bigram_freq[(w2, w3)] / unigram_freq[w2]
     else:
         p_bi = 0
 
-    # Trigram probability
     if bigram_freq[(w1, w2)] > 0:
         p_tri = (
             trigram_freq[(w1, w2, w3)]

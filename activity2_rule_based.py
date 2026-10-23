@@ -6,7 +6,6 @@ from nltk.tag import RegexpTagger
 nltk.download('punkt')
 nltk.download('punkt_tab')
 
-# Patterns are checked from top to bottom
 patterns = [
     (r'.*ing$', 'VBG'),                 # running
     (r'.*ed$', 'VBD'),                  # examined

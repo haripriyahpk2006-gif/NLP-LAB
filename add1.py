@@ -1,6 +1,4 @@
 
-# Experiment 1: Add-1 (Laplace) Smoothing
-
 import nltk
 nltk.download('punkt')
 nltk.download('punkt_tab')

@@ -1,14 +1,11 @@
 
-# Given data
 total_tokens = 2_000_000
 vocabulary_types = 50_000
 most_frequent_word = "the"
 frequency_rank_1 = 120_000
 
-# Zipf's law constant
 k = frequency_rank_1
 
-# Ranks to calculate
 ranks = [1, 2, 10, 100, 50_000]
 
 print("Zipf's Law Frequency Estimation")

@@ -7,20 +7,17 @@ nltk.download('brown')
 nltk.download('punkt')
 nltk.download('punkt_tab')
 
-# Load and split the Brown news corpus
 tagged_sentences = brown.tagged_sents(categories='news')
 
 size = int(len(tagged_sentences) * 0.9)
 train_data = tagged_sentences[:size]
 test_data = tagged_sentences[size:]
 
-# Baseline tagger
 baseline_tagger = UnigramTagger(train_data)
 
 baseline_accuracy = baseline_tagger.accuracy(test_data)
 print(f"Baseline accuracy: {baseline_accuracy * 100:.2f}%")
 
-# Transformation rule templates
 templates = brill.brill24()
 
 
@@ -51,13 +48,10 @@ def train_brill(max_rules):
     return tagger
 
 
-# Train using 10 rules
 brill_tagger_10 = train_brill(10)
 
-# Train using 30 rules
 brill_tagger_30 = train_brill(30)
 
-# Test the tagger with 30 rules
 sentence = "They will fish for hours near the river bank"
 tokens = word_tokenize(sentence)
 

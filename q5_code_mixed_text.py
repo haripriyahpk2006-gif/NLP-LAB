@@ -3,10 +3,8 @@ import re
 
 text = input("Enter a code-mixed sentence: ")
 
-# Simple tokenization
 tokens = re.findall(r"[A-Za-z]+|[^\w\s]", text)
 
-# Example dictionary for this sentence
 language_labels = {
     "kal": "HI",
     "ka": "HI",

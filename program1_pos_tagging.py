@@ -8,11 +8,9 @@ nltk.download('averaged_perceptron_tagger_eng')
 
 sentence = input("Enter a sentence: ")
 
-# Tokenization
 tokens = word_tokenize(sentence)
 print("\nTokens:", tokens)
 
-# Part-of-Speech Tagging
 tagged = pos_tag(tokens)
 
 print("\nWord\t\tPoS Tag")

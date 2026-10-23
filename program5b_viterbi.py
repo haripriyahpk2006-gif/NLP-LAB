@@ -1,21 +1,18 @@
 
 states = ['DT', 'NN', 'VB']
 
-# Starting probabilities
 start_p = {
     'DT': 0.6,
     'NN': 0.3,
     'VB': 0.1
 }
 
-# Transition probabilities
 trans_p = {
     'DT': {'DT': 0.05, 'NN': 0.85, 'VB': 0.10},
     'NN': {'DT': 0.10, 'NN': 0.30, 'VB': 0.60},
     'VB': {'DT': 0.40, 'NN': 0.50, 'VB': 0.10}
 }
 
-# Emission probabilities
 emit_p = {
     'DT': {'the': 0.7, 'a': 0.3},
     'NN': {
@@ -30,21 +27,18 @@ emit_p = {
 
 def viterbi(obs, states, start_p, trans_p, emit_p):
 
-    # Handle empty input
     if not obs:
         return 0.0, []
 
     V = [{}]
     path = {}
 
-    # Initialization
     for st in states:
         V[0][st] = (
             start_p[st] * emit_p[st].get(obs[0], 1e-6)
         )
         path[st] = [st]
 
-    # Recursion
     for t in range(1, len(obs)):
         V.append({})
         new_path = {}
@@ -65,7 +59,6 @@ def viterbi(obs, states, start_p, trans_p, emit_p):
 
         path = new_path
 
-    # Termination
     n = len(obs) - 1
 
     best_final_prob, best_final_st = max(
@@ -75,7 +68,6 @@ def viterbi(obs, states, start_p, trans_p, emit_p):
     return best_final_prob, path[best_final_st]
 
 
-# Test the algorithm
 sentence = ['the', 'dog', 'bites']
 
 prob, tag_sequence = viterbi(

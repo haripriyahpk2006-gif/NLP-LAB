@@ -2,7 +2,6 @@
 import nltk
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 
-# Download WordNet data if required
 nltk.download("wordnet", quiet=True)
 nltk.download("omw-1.4", quiet=True)
 
@@ -16,8 +15,6 @@ print("-" * 40)
 
 for word in words:
     stem = stemmer.stem(word)
-
-    # Treat these words as verbs except runner/runners
     if word in ["running", "ran", "runs"]:
         lemma = lemmatizer.lemmatize(word, pos="v")
     else:

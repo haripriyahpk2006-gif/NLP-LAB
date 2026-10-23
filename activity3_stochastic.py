@@ -34,14 +34,11 @@ def evaluate_taggers(category, train_ratio):
     return bigram_tagger
 
 
-# Compare training sizes on the news category
 evaluate_taggers('news', 0.9)
 evaluate_taggers('news', 0.5)
 
-# Compare with a different category
 evaluate_taggers('romance', 0.9)
 
-# Tag a new sentence using the news corpus
 tagged_sentences = brown.tagged_sents(categories='news')
 size = int(len(tagged_sentences) * 0.9)
 train_data = tagged_sentences[:size]
